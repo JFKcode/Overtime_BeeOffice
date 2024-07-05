@@ -9,12 +9,12 @@ import os
 from tkinter import messagebox
 
 def add_overtime():
-    # Sprawdzenie, czy plik data.csv istnieje
+    # Checking whether a data.csv file exists
     if not os.path.exists('data.csv'):
         messagebox.showerror("Błąd", "Plik data.csv nie istnieje.")
         return
 
-    # Konfiguracja logowania
+    # Login configuration
     logging.basicConfig(level=logging.INFO,
                         format='%(asctime)s %(levelname)-8s %(message)s',
                         datefmt='%y-%m-%d %H:%M',
@@ -31,7 +31,7 @@ def add_overtime():
     now = datetime.date.today()
     csvname = str(now) + ".csv"
 
-    # Ładowanie danych z pliku data.csv
+    # Loading data from a data.csv file
     nadgodziny = pd.read_csv('data.csv', header=None).rename(columns={
         0: 'ID',
         1: 'Data',
@@ -39,7 +39,7 @@ def add_overtime():
         3: 'GodzinaDo'
     })
 
-    # Ładowanie danych logowania z pliku loginy.csv
+    # Loading login data from a login.csv file
     if not os.path.exists('loginy.csv'):
         messagebox.showerror("Błąd", "Plik loginy.csv nie istnieje.")
         return

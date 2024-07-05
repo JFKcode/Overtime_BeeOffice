@@ -49,11 +49,11 @@ class AppLogic:
         user_number = self.user_number.get()
 
         if len(user_number) != 5:
-            messagebox.showerror("Błąd", "Numer ID musi zawierać dokładnie 5 cyfr.")
+            messagebox.showerror("Error", "The ID number must contain exactly 5 digits.")
             return
 
         if not self.is_user_in_login_csv(user_number):
-            messagebox.showerror("Błąd", "Brak podanego ID w bazie.")
+            messagebox.showerror("Error", "No ID specified in the database.")
             return
 
         date = self.parent.date_entry.get()
@@ -65,7 +65,7 @@ class AppLogic:
                 writer = csv.writer(file)
                 writer.writerow([user_number, date, time_from, time_to])
         except PermissionError:
-            messagebox.showerror("Błąd", "Brak uprawnień do zapisu w pliku 'data.csv'.")
+            messagebox.showerror("Error", "No permission to write to 'data.csv' file.")
 
         self.data_list.insert(tk.END, f"{user_number}, {date}, {time_from}, {time_to}")
 
@@ -80,7 +80,7 @@ class AppLogic:
                     for row in reader:
                         self.data_list.insert(tk.END, f"{row[0]}, {row[1]}, {row[2]}, {row[3]}")
             except PermissionError:
-                messagebox.showerror("Błąd", "Brak uprawnień do odczytu pliku 'data.csv'.")
+                messagebox.showerror("Error", "No permission to read file 'data.csv'.")
 
     def delete_data(self):
         selected_indices = self.data_list.curselection()
@@ -96,10 +96,10 @@ class AppLogic:
                     if index not in selected_indices:
                         writer.writerow(row.split(", "))
         except PermissionError:
-            messagebox.showerror("Błąd", "Brak uprawnień do zapisu w pliku 'data.csv'.")
+            messagebox.showerror("Error", "No permission to write to 'data.csv' file.")
 
     def add_overtime(self):
-        print("Dodaj nadgodziny - funkcjonalność do zaimplementowania")
+        print("Add overtime")
 
     def validate_id_length(self, P):
         if len(P) > 5:
